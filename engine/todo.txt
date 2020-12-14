@@ -1,0 +1,4 @@
+Create a cleaner MAIN file or smth, instead of having all the setup there
+Just a start, and update or smth
+Like a game manager i guess, call start and update before other object's start and updates
+Create a instantiate function in index.js that it can call to spawn new gameobjects
