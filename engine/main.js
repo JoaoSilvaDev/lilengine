@@ -10,12 +10,23 @@ class Main extends GameObject
 {
     constructor(position)
     {
-        super(position, "Main", 0)
+        super(position, "Main", 5)
     }
 
     start()
-    {  
-        instantiate(new BouncingBall({x: canvasSize.x/2, y:canvasSize.y/2}, 25, "#fcbb6d", {x:10, y:10}))
+    {        
+        SetLayerCompositeOperation(5, "lighter")
+        for(var i = 0; i < 10; i++)
+        {
+            let radius = JMath.RandomRange(50, 100)
+            let spd = 10
+            instantiate(new BouncingBall({x: JMath.RandomRange(radius, canvasSize.x - radius),
+                                        y: JMath.RandomRange(radius, canvasSize.y - radius)},
+                                        radius,
+                                        JColor.RandomColor(0.7, 0.5, 1),
+                                        {x:JMath.RandomRange(-spd, spd),
+                                        y:JMath.RandomRange(-spd, spd)}))
+        }
     }
 
     update(timeStamp)

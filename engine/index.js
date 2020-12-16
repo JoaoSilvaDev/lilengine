@@ -2,6 +2,7 @@
 
 // Rendering
 let ctx = []
+let ctxCompositeOperation = []
 let renderingLayerCount
 let canvasSize = {x:0, y:0}
 
@@ -16,11 +17,13 @@ function start()
     renderingLayerCount = document.querySelectorAll('canvas').length
     canvasSize.x = innerWidth
     canvasSize.y = innerHeight
+
     for(var i = 0; i < renderingLayerCount; i++)
     {
         ctx[i] = document.getElementById('layer'+i).getContext('2d')
         ctx[i].canvas.width = canvasSize.x
         ctx[i].canvas.height = canvasSize.y
+        ctxCompositeOperation[i] = "source-over"
     }
 
     // Initialize Main
@@ -49,7 +52,10 @@ function draw()
 {
     // Clear all contexts
     for(var i = 0; i < renderingLayerCount; i++)
+    {
         ctx[i].clearRect(0,0, ctx[i].canvas.width, ctx[i].canvas.height)
+        ctx[i].globalCompositeOperation = ctxCompositeOperation[i]
+    }
 
     // Fill bottom layer
     ctx[0].fillStyle = "#475c7a"
@@ -66,4 +72,9 @@ function instantiate(gameObject)
 {
     gameObjects.push(gameObject)
     gameObject.start()
+}
+
+function SetLayerCompositeOperation(index, operation)
+{
+    ctxCompositeOperation[index] = operation
 }
